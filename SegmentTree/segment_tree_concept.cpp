@@ -3,10 +3,20 @@
 #include <limits.h>
 using namespace std;
 
+/*  segment tree concept demonstration
+        - range maximum query and point update
+
+    Complexities:
+        - Build Tree: O(n)
+        - Range Query: O(log n)
+        - Update: O(log n)
+        - Space Complexity: O(n)
+*/
+
 class SegmentTree {
     private:
-        vector<int> seg;
-        int n;
+        vector<int> seg; // segment tree storage
+        int n; // size of original array
         
         void BuildTree(int i, int low, int high, vector<int>& arr) {
             if (low == high) {
@@ -38,22 +48,23 @@ class SegmentTree {
                 updateTree_utility(index, val, 2 * i + 2, mid + 1, high);
             }
             
-            // operations
+            // re-calculate max for this node
             seg[i] = max(seg[2 * i + 1], seg[2 * i + 2]);
         }
         
+        // Range query: maximum in [l, r]
         int rangeQuery_utility(int l, int r, int i, int low, int high) {
-            // no overlap
+            // Case 1: no overlap
             if (r < low || l > high) {
                 return INT_MIN; // for max query
             }
             
-            // complete overlap
+            // Case 2: complete overlap
             if (l <= low && r >= high) {
                 return seg[i];
             }
             
-            // partial overlap
+            // Case 3: partial overlap
             int mid = (low + high) / 2;
             int left = rangeQuery_utility(l, r, 2 * i + 1, low, mid);
             int right = rangeQuery_utility(l, r, 2 * i + 2, mid + 1, high);
@@ -63,9 +74,10 @@ class SegmentTree {
         }
 
     public:
+        // Constructor: build tree from input array
         SegmentTree(vector<int>& arr) {
             n = arr.size();
-            seg.resize(4 * n);
+            seg.resize(4 * n); // maximum value does node index can go up to 4*n
             BuildTree(0, 0, n - 1, arr);
         }
         
