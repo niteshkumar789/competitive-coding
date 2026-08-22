@@ -1,0 +1,5 @@
+# Ignore all executable files
+*.exe
+
+# VS Code settings
+.vscode/
