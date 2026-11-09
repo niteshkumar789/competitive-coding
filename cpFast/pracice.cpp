@@ -53,16 +53,25 @@ using namespace std;
 */
 
 int main() {
-    // int t;
-    // cin >> t;
-    
-    // while (t--) {
-    //     int n;
-    //     cin >> n;
-    // }
+    int a, b, c, d;
+    cin >> a;
+    cin >> b;
+    cin >> c;
+    cin >> d;
 
-    ll x = 3;
-    debug(x);
+    int ct = 0;
+    if (a == b) ct += 1;
+    if (a == c) ct += 1;
+    if (a == d) ct += 1;
 
+    if (b != a) {
+        if (b == c) ct += 1;
+        if (b == d) ct += 1;
+    }
+    if (c != b) {
+        if (c == d) ct += 1;
+    }
+
+    cout << ct;
     return 0;
 }
