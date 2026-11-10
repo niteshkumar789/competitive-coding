@@ -53,25 +53,20 @@ using namespace std;
 */
 
 int main() {
-    int a, b, c, d;
-    cin >> a;
-    cin >> b;
-    cin >> c;
-    cin >> d;
+    int n;
+    cin >> n;
+    double ans = 0;
+    int sum = 0;
+    int x = n;
 
-    int ct = 0;
-    if (a == b) ct += 1;
-    if (a == c) ct += 1;
-    if (a == d) ct += 1;
-
-    if (b != a) {
-        if (b == c) ct += 1;
-        if (b == d) ct += 1;
+    while (n--) {
+        int a;
+        cin >> a;
+        sum += a;
     }
-    if (c != b) {
-        if (c == d) ct += 1;
-    }
+    ans = sum / double(x);
+    // cout << ans;
+    cout << fixed << setprecision(12) << ans;
 
-    cout << ct;
     return 0;
 }
