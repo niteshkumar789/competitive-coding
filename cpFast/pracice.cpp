@@ -3,32 +3,32 @@ using namespace std;
 
 // ************************************ MACROS ************************************
 // Type shortcuts
-#define ll long long
-#define pb push_back
-#define pbb pop_back
-#define mp make_pair
-#define F first
-#define S second
-#define pii pair<int, int>
-#define vi vector<int>
-#define vpi vector<pii>
+// #define ll long long
+// #define pb push_back
+// #define pbb pop_back
+// #define mp make_pair
+// #define F first
+// #define S second
+// #define pii pair<int, int>
+// #define vi vector<int>
+// #define vpi vector<pii>
 
-#define SQ(a) (a)*(a)
+// #define SQ(a) (a)*(a)
 
-// Fast I/O
-#define fastio ios::sync_with_stdio(false); cin.tie(NULL);
+// // Fast I/O
+// #define fastio ios::sync_with_stdio(false); cin.tie(NULL);
 
-// Loops
-#define rep(i, a, b) for (int i = a; i < b; i++)
-#define rrep(i, a, b) for (int i = b - 1; i >= a; i--)
+// // Loops
+// #define rep(i, a, b) for (int i = a; i < b; i++)
+// #define rrep(i, a, b) for (int i = b - 1; i >= a; i--)
 
-// Sorting and useful STL tricks
-#define all(x) (x).begin(), (x).end()
-#define rall(x) (x).rbegin(), (x).rend()
-#define sortall(x) sort(all(x))
+// // Sorting and useful STL tricks
+// #define all(x) (x).begin(), (x).end()
+// #define rall(x) (x).rbegin(), (x).rend()
+// #define sortall(x) sort(all(x))
 
-// Debugging
-#define debug(x) cout << #x << " = " << x << endl;
+// // Debugging
+// #define debug(x) cout << #x << " = " << x << endl;
 
 /*  Notes:
         (a+b) mod m = (a % m + b % m) % m
@@ -52,21 +52,63 @@ using namespace std;
     removing elements take O(1) time on average at both ends
 */
 
+void helper(vector<int> seq, int n) {
+    vector<int> inc;
+    vector<int> dec;
+
+    // sort
+    sort(seq.begin(), seq.end());
+    inc.push_back(seq[0]);
+
+    int ct = 1;
+    for (int i = 1; i < n; i++) {
+        if (seq[i] == seq[i - 1]) {
+            dec.push_back(seq[i]);
+            ct++;
+        }
+        else {
+            ct = 1;
+            inc.push_back(seq[i]);
+        }
+        if (ct == 3) {
+            cout << "NO";
+            return;
+        }
+    }
+
+    sort(dec.rbegin(), dec.rend());
+    
+    int s1 = inc.size();
+    cout << "YES" << endl;
+    cout << s1 << endl;
+    if (s1 == 0) {
+        cout << endl;
+    }
+    for (int i = 0; i < s1; i++) {
+        cout << inc[i];
+        if (i != s1 - 1) {
+            cout << " ";
+        }
+    }
+    cout << endl;
+    // --------------------------------------------
+    int s2 = dec.size();
+    cout << s2 << endl;
+    if (s2 == 0) {
+        cout << endl;
+        return;
+    }
+    for (int i = 0; i < dec.size(); i++) {
+        cout << dec[i];
+        if (i != s2 - 1) {
+            cout << " ";
+        }
+    }
+}
 int main() {
     int n;
     cin >> n;
-    double ans = 0;
-    int sum = 0;
-    int x = n;
-
-    while (n--) {
-        int a;
-        cin >> a;
-        sum += a;
-    }
-    ans = sum / double(x);
-    // cout << ans;
-    cout << fixed << setprecision(12) << ans;
-
+    long long sum = 2 * (pow(2, n) - 1);
+    cout << sum;
     return 0;
 }
