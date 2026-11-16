@@ -1,4 +1,6 @@
-// problem 11
+// 1392C (Omkar and Waterslide)
+// https://codeforces.com/problemset/problem/1392/C
+
 // ****************** Important Question ******************
 #include <bits/stdc++.h>
 using namespace std;
