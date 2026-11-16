@@ -1,5 +1,4 @@
-// problem 10
-// ****************** Important Question ******************
+// problem 10 - 1399C (Boats Competition)
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -27,29 +26,6 @@ int main() {
     while (t--) {
         int n;
         cin >> n;
-        vi arr(n);
-        rep(i, 0, n) {
-            cin >> arr[i];
-        }
-
-        ll sum = 0;
-        int i = 1;
-        while (i < n) {
-            if (arr[i - 1] > arr[i]) {
-                ll temp = arr[i - 1];
-                ll currDiff = temp - arr[i];
-
-                i++;
-                ll maxDiff = 0;
-                while (arr[i - 1] > arr[i] && i < n) {
-                    maxDiff = temp - arr[i];
-                    i++;
-                }
-                sum += max(currDiff, maxDiff);
-            }
-            i++;
-        }
-        cout << sum << endl;
     }
     return 0;
 }
