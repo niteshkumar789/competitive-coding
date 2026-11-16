@@ -1,4 +1,6 @@
-// problem 10 - 1399C (Boats Competition)
+// 1399C (Boats Competition)
+// https://codeforces.com/problemset/problem/1399/C
+
 #include <bits/stdc++.h>
 using namespace std;
 
