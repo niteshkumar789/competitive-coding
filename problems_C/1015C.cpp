@@ -10,7 +10,6 @@ using namespace std;
 #define pii pair<int, int>
 #define vi vector<int>
 #define vpi vector<pii>
-
 #define fastio ios::sync_with_stdio(false); cin.tie(NULL);
 
 int main() {
@@ -19,17 +18,36 @@ int main() {
     cin >> n >> m;
     
     int temp = n;
-    vector<vi> songs;
+    vi diff;
+    ll total = 0;
+    ll compressed = 0;
+
     while (temp--) {
         int ai, bi;
         cin >> ai >> bi;
-        songs.pb({ai, bi});
+    
+        total += ai;
+        compressed += bi;
+        diff.pb(ai - bi);
     }
 
-    // 10 8 - 2
-    // 7 4 - 3
-    // 3 1 - 2
-    // 5 4 - 1
+    if (compressed > m) {
+        cout << -1;
+        return 0;
+    }
 
+    sort(diff.begin(), diff.end());
+    ll remaining = m - compressed;
+    ll ans = n;
+    for(int i = 0; i < n; i++) {
+        if (diff[i] <= remaining) {
+            remaining -= diff[i];
+            ans--;
+        }
+        else {
+            break;
+        }
+    }
+    cout << ans;
     return 0;
 }
