@@ -23,7 +23,6 @@ void helper(vi arr, int n) {
             odd.pb(arr[i]);
         }
     }
-
     if ((odd.size() & 1) == 0 && (even.size() & 1) == 0) {
         cout << "YES" << endl;
         return;
