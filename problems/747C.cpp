@@ -28,7 +28,7 @@ void printArray(vi arr) {
     int n = arr.size();
     rep(i, 0, n) {
         cout << arr[i];
-        if (i != n - 1) cout << " ";
+        if (i != n - 1) cout << endl;
     }
 }
 
@@ -45,7 +45,44 @@ int main() {
         matrix.pb({x, y, z});
     }
 
+    vi ans;
+    priority_queue<pii, vector<pii>, greater<pii>> occupied;
+    sti free;
+    rep(i, 1, n + 1) {
+        free.insert(i);
+    }
     
+    rep(i, 0, q) {
+        int time = matrix[i][0];
+        int reqServer = matrix[i][1];
+        int totalTime = matrix[i][2];
+
+        // At this particular moment find all free server from min-heap
+        while (!occupied.empty() && occupied.top().F <= time) {
+            int id = occupied.top().S;
+            occupied.pop();
+            free.insert(id);
+        }
+
+        // find available server
+        if (free.size() < reqServer)  {
+            ans.pb(-1);
+        }
+        else {
+            int i = 0;
+            int sum = 0;
+            while (i < reqServer) {
+                int id = *free.begin();
+                sum += id;
+                free.erase(id);
+                occupied.push({time + totalTime, id});
+                i++;
+            }
+            ans.pb(sum);
+        }
+    }
+
+    printArray(ans);
 
     return 0;
 }
