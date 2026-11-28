@@ -51,7 +51,7 @@ void solve(int n, string str, int k) {
     int ans = 0;
     bool flag = false;
 
-    // case 1
+    // case 1: leading zeros (or all zeros)
     while (i < n && str[i] != '1') {
         i++;
     }
@@ -59,24 +59,37 @@ void solve(int n, string str, int k) {
     if (!flag) {
         ans += 1;
         ans += ((i - 1) / (k + 1));
-        cout << ans << endl;
+        cout << ans << "\n";
         return;
     }
     ans += (i / (k + 1));
 
-    // case 2
-    int j = i + 1;
-    while (j < n) {
-        while (j < n && str[j] != '1') {
-            j++;
-        }
-        int ct = j - i - 1;
-        ans += (ct / ((k * 2) + 1));
-        i = j;
-        j++;
+    // case 2: trailing zeros
+    int j = n - 1;
+    while (j >= i && str[j] != '1') {
+        j--;
     }
-    cout << ans << endl;
+    
+    ans += ((n - j - 1) / (k + 1));
+    if (i == j) {
+        cout << ans << "\n";
+        return;
+    }
+
+    // case 3: middle segments between two '1's
+    int l = i + 1;
+    while (l <= j) {
+        while (l <= j && str[l] != '1') {
+            l++;
+        }
+        int ct = l - i - 1;
+        ans += max(0, (ct - k) / (k + 1));
+        i = l;
+        l++;
+    }
+    cout << ans << "\n";
 }
+
 int main() {
     fastio;
 
@@ -86,9 +99,8 @@ int main() {
         int n, k;
         cin >> n >> k;
 
-        cin.ignore();
         string str;
-        getline(cin, str);
+        cin >> str; // Fixed input reading
         solve(n, str, k);
     }
 
